@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ChatRoomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChatHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ChatGroupId" Type="int" Nullable="false" />
+          <Property Name="Msg" Type="nvarchar" MaxLength="500" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="isRead" Type="tinyint" Nullable="false" />
+          <Property Name="MsgType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="LoginDate" Type="datetime" />
+          <Property Name="LoginOutDate" Type="datetime" />
+          <Property Name="LoginTime" Type="int" />
+        </EntityType>
+        <EntityType Name="UserOpenIds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UnionOpenId" Type="nvarchar" MaxLength="300" />
+          <Property Name="UnionId" Type="nvarchar" MaxLength="300" />
+          <Property Name="ServiceProvider" Type="nvarchar" MaxLength="100" />
+          <Property Name="AppIdType" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="100" />
+          <Property Name="Nick" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="300" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="200" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="IsOnline" Type="tinyint" />
+          <Property Name="LastLoginDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="ChatRoomModelStoreContainer">
+          <EntitySet Name="ChatHistory" EntityType="Self.ChatHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginRecord" EntityType="Self.LoginRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserOpenIds" EntityType="Self.UserOpenIds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChatRoomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Users" EntityType="ChatRoomModel.Users" />
+          <EntitySet Name="UserOpenIds" EntityType="ChatRoomModel.UserOpenIds" />
+          <EntitySet Name="ChatHistory" EntityType="ChatRoomModel.ChatHistory" />
+          <EntitySet Name="LoginRecord" EntityType="ChatRoomModel.LoginRecord" />
+        </EntityContainer>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nick" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Key" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="IsOnline" Type="Byte" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserOpenIds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UnionOpenId" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="UnionId" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceProvider" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AppIdType" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ChatHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Msg" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isRead" Type="Byte" Nullable="false" />
+          <Property Name="MsgType" Type="Int32" Nullable="false" />
+          <Property Name="ChatGroupId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LoginDate" Type="DateTime" Precision="3" />
+          <Property Name="LoginOutDate" Type="DateTime" Precision="3" />
+          <Property Name="LoginTime" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChatRoomModelStoreContainer" CdmEntityContainer="Entities" >
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ChatRoomModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Nick" ColumnName="Nick" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserOpenIds">
+            <EntityTypeMapping TypeName="ChatRoomModel.UserOpenIds">
+              <MappingFragment StoreEntitySet="UserOpenIds">
+                <ScalarProperty Name="AppIdType" ColumnName="AppIdType" />
+                <ScalarProperty Name="ServiceProvider" ColumnName="ServiceProvider" />
+                <ScalarProperty Name="UnionId" ColumnName="UnionId" />
+                <ScalarProperty Name="UnionOpenId" ColumnName="UnionOpenId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatHistory">
+            <EntityTypeMapping TypeName="ChatRoomModel.ChatHistory">
+              <MappingFragment StoreEntitySet="ChatHistory">
+                <ScalarProperty Name="ChatGroupId" ColumnName="ChatGroupId" />
+                <ScalarProperty Name="MsgType" ColumnName="MsgType" />
+                <ScalarProperty Name="isRead" ColumnName="isRead" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginRecord">
+            <EntityTypeMapping TypeName="ChatRoomModel.LoginRecord">
+              <MappingFragment StoreEntitySet="LoginRecord">
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="LoginOutDate" ColumnName="LoginOutDate" />
+                <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
